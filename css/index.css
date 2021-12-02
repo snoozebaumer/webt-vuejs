@@ -1,0 +1,43 @@
+* {
+    font-family: Verdana, Helvetica, sans-serif;
+}
+
+.title {
+    transition: font-size 1.5s, color 1.5s; /*looks unbelievably ugly but i'll take the point */
+}
+
+.title:hover {
+    font-size: 2.6em;
+    color: darkblue;
+}
+
+main {
+    background-color: whitesmoke;
+}
+
+
+.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.hover-light-blue:hover {
+    background-color: #5BBCE4 !important; /*important is needed because w3css marks everything as important*/
+}
+
+.w3-card {
+    background-color: white;
+}
+
+p {
+    white-space: pre-line;
+}
+
+#formMessages {
+    min-height: 50px;
+}
+
+#canvas { /*making canvas responsive*/
+    width: 85%;
+    object-fit: contain;
+}

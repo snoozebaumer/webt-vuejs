@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unnecessary Sales Shop USS</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div id="content">
+    <header class="w3-container w3-light-blue">
+        <h1 class="w3-margin-left title">USS - Unnecessary Sales Shop</h1>
+        <nav class="w3-bar">
+            <a href="?site=Home" v-bind:class="{active: isActive('Home')}"
+               class="w3-bar-item w3-button hover-light-blue w3-mobile">
+                Information
+            </a>
+            <a href="?site=Form" v-bind:class="{active: isActive('Form')}"
+               class="w3-bar-item w3-button hover-light-blue w3-mobile">
+                Formular
+            </a>
+            <a  href="?site=Canvas" v-bind:class="{active: isActive('Canvas')}"
+               class="w3-bar-item w3-button hover-light-blue w3-mobile">
+                Canvas
+            </a>
+        </nav>
+    </header>
+
+    <main class="w3-container">
+        <template v-if="isActive('Home')">
+            <div class="w3-container">
+                <h2>{{ currentSale }}</h2>
+                <p>{{ saleText }}</p>
+            </div>
+
+            <div class="w3-row">
+                <div class="w3-col m3" v-for="product in products">
+                    <section class="w3-card w3-margin">
+                        <div class="w3-container">
+                            <h3>{{ product.name }}</h3>
+                            <div class="w3-margin-top">
+                                <div>CHF {{ product.price }} / Stk</div>
+                                <div class="w3-right w3-text-red">-{{ product.reduction }}%</div>
+                            </div>
+                        </div>
+                        <img class="w3-image w3-padding" v-bind:alt="product.name" v-bind:src="product.image"/>
+                        <div class="w3-container">
+                            <p>
+                                {{ product.description }}
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </template>
+        <template v-else-if="isActive('Form')">
+            <div class="w3-container">
+                <h2>{{ formTitle }}</h2>
+                <p>{{formDescription}}</p>
+                <form action="bestellung.php" class="w3-container w3-margin" method="post">
+                    <div v-for="input in formInputs">
+                        <label v-bind:for="input.name">{{ input.label }}</label>
+                        <select v-if="input.type==='select'" v-bind:name="input.name" v-bind:id="input.name"
+                                v-model="order[input.name]"  :required="input.required" class="w3-select">
+                            <option v-for="product in products" v-bind:value="product.name">{{product.name}}</option>
+                        </select>
+                        <input v-else v-bind:name="input.name" v-bind:id="input.name" class="w3-input" v-model="order[input.name]" v-bind:type="input.type"
+                               :required="input.required" :minlength="input.minLength" :maxlength="input.maxLength"
+                               :min="input.min" :max="input.max">
+                    </div>
+
+                    <input type="submit" onclick="return validateForm()" class="w3-btn w3-blue w3-margin-top w3-right"/>
+                </form>
+            </div>
+            <div id="formMessages">
+                <div v-if="formSuccess" class="w3-text-green">Ihre Bestellung wurde erfolgreich empfangen.</div>
+                <div v-for="error in formErrorList" class="w3-text-red">{{error}}</div>
+            </div>
+        </template>
+        <template v-else-if="isActive('Canvas')">
+            <div class="w3-container">
+                <h2>Sale!</h2>
+                <canvas width="900"  height="450" id="canvas"></canvas>
+            </div>
+        </template>
+    </main>
+</div>
+<footer class="w3-container w3-light-blue">
+    <div class="w3-bar">
+        <div class="w3-bar-item">MEP WEBT HS 2021</div>
+        <div class="w3-bar-item w3-right">Samuel Nussbaumer</div>
+    </div>
+</footer>
+</body>
+</html>
+
+<!-- script is intentionally loaded at the bottom of page bc it can't find id "content" if it is loaded before DOM -->
+<script src="js/vue-logic.js"></script>
