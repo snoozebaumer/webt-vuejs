@@ -155,22 +155,22 @@ new Vue({
         },
         displayBackground: function (ctx) {
             ctx.fillStyle = 'black';
-            ctx.fillRect(0, 0, 900, 450); //1. draw func
+            ctx.fillRect(0, 0, 900, 450);
         },
         displayBorder: function (ctx) {
             ctx.strokeStyle = 'white';
-            ctx.strokeRect(30, 30, 840, 390); //2. draw func
+            ctx.strokeRect(30, 30, 840, 390);
         },
         drawMinusRectangle: function (ctx) {
             ctx.fillStyle = 'red';
-            ctx.fillRect(120, 216, 45, 9); //3. draw func
+            ctx.fillRect(120, 216, 45, 9);
         },
         drawZeroEllipse: function (ctx) {
             ctx.strokeStyle = 'red';
             ctx.lineWidth = 9;
             ctx.beginPath();
             ctx.ellipse(360, 216, 30, 45, 0, 0, 2 * Math.PI);
-            ctx.stroke(); //4. draw func
+            ctx.stroke();
         },
         drawPercentageCircle: function (ctx, x, y) {
             ctx.beginPath();
@@ -182,7 +182,7 @@ new Vue({
             ctx.moveTo(480, 264);
             ctx.lineTo(540, 186);
             ctx.closePath();
-            ctx.stroke(); // 6. draw func
+            ctx.stroke();
         }
     }
 });
